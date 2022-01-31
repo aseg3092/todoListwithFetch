@@ -7,7 +7,7 @@ const Home = () => {
 	const [items, setItems] = useState([]);
 
 	const saveTodo = (e) => {
-		// e.preventDefault();
+		e.preventDedault();
 		if (e.key === "Enter") {
 			setItems([...items, { id: items.length, name: inputTodo }]);
 			setInputTodo("");
