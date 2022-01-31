@@ -4,11 +4,17 @@ import TodoList from "./TodoList.jsx";
 //create your first component
 const Home = () => {
 	const [inputTodo, setInputTodo] = useState("");
+	const todos = [];
 
 	const saveTodo = (e) => {
-		e.preventDedault();
-		console.log("input");
+		if (e.key === "Enter") {
+			//console.log({ inputTodo }.inputTodo);
+			todos.push({ inputTodo }.inputTodo);
+			console.log(todos[0]);
+			document.getElementById("inputTodo").value = "";
+		}
 	};
+
 	return (
 		<div>
 			<h1 className="text-center mt-5">TODOS</h1>
@@ -31,8 +37,9 @@ const Home = () => {
 				id="inputTodo"
 				aria-describedby="emailHelp"
 				onChange={(e) => setInputTodo(e.target.value)}
+				onKeyPress={saveTodo}
 			/>
-			<TodoList inputTodo={inputTodo} />
+			<TodoList inputTodo={todos} />
 		</div>
 	);
 };
