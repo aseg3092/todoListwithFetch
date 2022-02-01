@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TodoList from "./TodoList.jsx";
 
 //create your first component
 const Home = () => {
@@ -7,36 +6,47 @@ const Home = () => {
 	const [items, setItems] = useState([]);
 
 	const saveTodo = (e) => {
-		e.preventDedault();
 		if (e.key === "Enter") {
-			setItems([...items, { id: items.length, name: inputTodo }]);
-			setInputTodo("");
-			console.log("un funciona");
+			if (inputTodo !== "") {
+				setItems([...items, { id: items.length, name: inputTodo }]);
+				setInputTodo("");
+			}
 		}
 	};
 
+	const deleteTodo = (id) => {
+		const newItems = items.filter((item) => item.id !== id);
+		setItems(newItems);
+	};
+
 	return (
-		<div>
+		<div className="container">
 			<h1 className="text-center mt-5">TODOS</h1>
 			<input
 				type="text"
-				placeholder="Add to do here"
+				placeholder="What needs to be done?"
 				className="form-control"
 				id="inputTodo"
+				value={inputTodo}
 				aria-describedby="emailHelp"
 				onChange={(e) => setInputTodo(e.target.value)}
 				onKeyPress={saveTodo}
 			/>
-
 			<ul>
 				{items.map((item) => (
 					<>
-						<li key={item.id}>{item.name}</li>
-						<i className="fa fa-trash"></i>
+						<li key={item.id}>
+							<span>
+								<i
+									className="fa fa-trash"
+									onClick={() => deleteTodo(item.id)}></i>
+							</span>
+							{item.name}
+						</li>
 					</>
 				))}
 			</ul>
-			{/* <TodoList inputTodo={todos} /> */}
+			<p>{items.length} items left</p>
 		</div>
 	);
 };

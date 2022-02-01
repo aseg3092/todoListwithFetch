@@ -10,6 +10,84 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
-ul{
-    display: flex;
+
+ul {
+	cursor: pointer;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	background: #fff;
+	padding-left: 10px;
+	line-height: 2em;
+	margin: 0;
+	color: #666;
+    border-radius: 30px;
+   /* box-shadow: 0px 0px 9px 4px #a3a130; */
+}
+
+li:nth-child(2n) {
+	background: #f7f7f7;
+}
+
+li.clicked {
+	color: gray;
+	text-decoration: line-through;
+}
+body {
+	font-family: "Roboto", sans-serif;
+    background-color: lightyellow;
+}
+
+h1.title {
+	text-align: center;
+	color: black;
+	letter-spacing: 2px;
+}
+
+input#inputTodo {
+	font-size: 18px;
+	color: #2980b9;
+	background: #b7eeff;
+	border: none;
+	width: 100%;
+	padding: 10px 10px 10px 20px;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-border-box: border-box;
+}
+
+input#inputTodo:focus {
+	background: white;
+	border: 2px solid skyblue;
+	outline: none;
+	transition: 0.1s;
+}
+
+i.fa-trash {
+	margin: 7px;
+}
+
+span {
+	background: tomato;
+	height: 35px;
+	width: 0;
+	margin-right: 10px;
+	margin-left: -10px;
+	text-align: center;
+	display: inline-block;
+	color: white;
+	opacity: 0;
+	transition: 0.2s linear;
+}
+
+li:hover span {
+	opacity: 1;
+	width: 40px;
+}
+p{
+    font-family: "Roboto", sans-serif;
+    color: lightgray;
 }
