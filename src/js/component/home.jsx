@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TodoLists from "./TodoLists.jsx";
 
 //create your first component
 const Home = () => {
@@ -32,20 +33,7 @@ const Home = () => {
 				onChange={(e) => setInputTodo(e.target.value)}
 				onKeyPress={saveTodo}
 			/>
-			<ul>
-				{items.map((item) => (
-					<>
-						<li key={item.id}>
-							<span>
-								<i
-									className="fa fa-trash"
-									onClick={() => deleteTodo(item.id)}></i>
-							</span>
-							{item.name}
-						</li>
-					</>
-				))}
-			</ul>
+			<TodoLists items={items} deleteTodo={deleteTodo} />
 			<p>{items.length} items left</p>
 		</div>
 	);
