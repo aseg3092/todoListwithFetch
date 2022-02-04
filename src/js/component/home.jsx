@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TodoLists from "./TodoLists.jsx";
 
 //create your first component
@@ -20,6 +20,11 @@ const Home = () => {
 		setItems(newItems);
 	};
 
+	useEffect(() => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/gabriel")
+			.then((response) => response.json())
+			.then((data) => console.log(data));
+	}, []);
 	return (
 		<div className="container">
 			<h1 className="text-center mt-5">TODOS</h1>
