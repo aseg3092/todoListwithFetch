@@ -3,15 +3,15 @@ import React from "react";
 const TodoLists = ({ items, deleteTodo }) => {
 	return (
 		<ul>
-			{items.map((item) => (
+			{items.map((item, index) => (
 				<>
-					<li key={item.id}>
+					<li key={index}>
 						<span>
 							<i
 								className="fa fa-trash"
-								onClick={() => deleteTodo(item.id)}></i>
+								onClick={() => deleteTodo(index)}></i>
 						</span>
-						{item.name}
+						{item.label}
 					</li>
 				</>
 			))}
