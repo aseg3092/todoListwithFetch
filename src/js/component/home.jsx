@@ -11,43 +11,42 @@ const Home = () => {
 			if (inputTodo !== "") {
 				setItems([...items, { label: inputTodo, done: true }]);
 				setInputTodo("");
-				//actualiazarTodos();
 			}
 		}
 	};
 
-	const actualiazarTodos = (newTodos) => {
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/gabriel", {
-			method: "PUT",
-			body: JSON.stringify(newTodos),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((resp) => {
-				console.log(resp.ok); // will be true if the response is successfull
-				console.log(resp.status); // the status code = 200 or code = 400 etc.
-				console.log(resp.text()); // will try return the exact result as string
-				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
-			})
-			.then((data) => {
-				//here is were your code should start after the fetch finishes
-				console.log(data); //this will print on the console the exact object received from the server
-			})
-			.catch((error) => {
-				//error handling
-				console.log(error);
-			});
+	const actualiazarTodos = async (newTodos) => {
+		let response = await fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/gabriel",
+			{
+				method: "PUT",
+				body: JSON.stringify(newTodos),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		let data = await response.json();
+		return data;
 	};
 	const deleteTodo = (id) => {
 		const newItems = items.filter((item, index) => index !== id);
 		setItems(newItems);
 	};
 
+	const getTodos = async () => {
+		let response = await fetch(
+			"https://assets.breatheco.de/apis/fake/todos/user/gabriel"
+		);
+		let data = await response.json();
+		setItems(data);
+	};
+
 	useEffect(() => {
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/gabriel")
-			.then((response) => response.json())
-			.then((data) => setItems(data));
+		if (items.length > 0) actualiazarTodos(items);
+	}, [items]);
+	useEffect(() => {
+		getTodos();
 	}, []);
 	return (
 		<div className="container">
@@ -58,7 +57,6 @@ const Home = () => {
 				className="form-control"
 				id="inputTodo"
 				value={inputTodo}
-				aria-describedby="emailHelp"
 				onChange={(e) => setInputTodo(e.target.value)}
 				onKeyPress={saveTodo}
 			/>
