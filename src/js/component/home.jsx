@@ -5,6 +5,7 @@ import TodoLists from "./TodoLists.jsx";
 const Home = () => {
 	const [inputTodo, setInputTodo] = useState("");
 	const [items, setItems] = useState([]);
+	let url = "https://assets.breatheco.de/apis/fake/todos/user/gabriel";
 
 	const saveTodo = (e) => {
 		if (e.key === "Enter") {
@@ -16,16 +17,13 @@ const Home = () => {
 	};
 
 	const actualiazarTodos = async (newTodos) => {
-		let response = await fetch(
-			"https://assets.breatheco.de/apis/fake/todos/user/gabriel",
-			{
-				method: "PUT",
-				body: JSON.stringify(newTodos),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		);
+		let response = await fetch(url, {
+			method: "PUT",
+			body: JSON.stringify(newTodos),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 		let data = await response.json();
 		return data;
 	};
@@ -35,9 +33,7 @@ const Home = () => {
 	};
 
 	const getTodos = async () => {
-		let response = await fetch(
-			"https://assets.breatheco.de/apis/fake/todos/user/gabriel"
-		);
+		let response = await fetch(url);
 		let data = await response.json();
 		setItems(data);
 	};
@@ -49,12 +45,11 @@ const Home = () => {
 		getTodos();
 	}, []);
 	return (
-		<div className="container">
+		<div className="container ">
 			<h1 className="text-center mt-5">TODOS</h1>
 			<input
 				type="text"
 				placeholder="What needs to be done?"
-				className="form-control"
 				id="inputTodo"
 				value={inputTodo}
 				onChange={(e) => setInputTodo(e.target.value)}

@@ -37,6 +37,7 @@ li:nth-child(2n) {
 }
 
 li.clicked {
+	padding: 50px;
 	color: gray;
 	text-decoration: line-through;
 }
@@ -95,4 +96,6 @@ li:hover span {
 p{
     font-family: "Roboto", sans-serif;
     color: lightgray;
+	cursor: pointer;
+    margin: 0px;
 }

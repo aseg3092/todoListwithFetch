@@ -2,7 +2,7 @@ import React from "react";
 
 const TodoLists = ({ items, deleteTodo }) => {
 	return (
-		<ul>
+		<ul className="list-group list-group-flush">
 			{items.map((item, index) => (
 				<>
 					<li key={index}>
